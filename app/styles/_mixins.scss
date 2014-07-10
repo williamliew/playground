@@ -1,0 +1,66 @@
+/** Border-radius. Example Usage: @include border-radius(10px); **/
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+        -ms-border-radius: $radius;
+            border-radius: $radius;
+}
+
+/** Transition. Example Usage: @include css3transition(all, 1s, ease-in-out); **/
+@mixin css3transition($property, $duration, $timing) {
+    -webkit-transition: $property $duration $timing;
+       -moz-transition: $property $duration $timing;
+        -ms-transition: $property $duration $timing;
+         -o-transition: $property $duration $timing;
+            transition: $property $duration $timing;
+}
+
+/** Translate. Example Usage: @include translate(10px, 10px, 10px); **/
+@mixin translate($x, $y, $z) {
+    -webkit-transform: translate3d($x, $y, $z);
+       -moz-transform: translate3d($x, $y, $z); 
+        -ms-transform: translate3d($x, $y, $z);
+         -o-transform: translate3d($x, $y, $z);
+            transform: translate3d($x, $y, $z);
+}
+
+/** Box shadow. Example Usage: @include box-shadow(1px, 1px, 1px, #333); **/
+@mixin box-shadow($x, $y, $z, $color) {
+    -webkit-box-shadow: $x $y $z $color;
+       -moz-box-shadow: $x $y $z $color;
+            box-shadow: $x $y $z $color;  
+}
+
+/** Opacity. Example Usage: @include opacity(1); **/
+@mixin opacity($value) {
+    $IEValue: $value*100;
+     opacity: $value;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+$IEValue+")";
+      filter: alpha(opacity=$IEValue);
+}
+
+/** Gradient. Example Usage: @include linear-gradient(#000, #BADA55); **/
+@mixin linear-gradient($fromColor, $toColor) {
+  background-color: $toColor; /* Fallback Color */
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, $fromColor, $toColor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, $fromColor, $toColor); /* FF3.6 */
+  background-image:     -ms-linear-gradient(top, $fromColor, $toColor); /* IE10 */
+  background-image:      -o-linear-gradient(top, $fromColor, $toColor); /* Opera 11.10+ */
+  background-image:         linear-gradient(top, $fromColor, $toColor);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+}
+
+
+/**  **/
+/* 
+  -webkit-overflow-scrolling: touch;
+*/
+
+/**  **/
+/* mobile tap blink fix 
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+*/
+
+
+

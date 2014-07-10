@@ -14,6 +14,12 @@
             temporaryArray: ['Matt D', 'Matt L', 'Matt F'],
             listHeight: 1,
             listPosition: 1,
+            curPosition: 0,
+//            newPosition: 0,
+            pageHeight: $('#whats-new').height(),
+            listElement: $('#whats-new'),
+            topShadowEl: $('.top-shadow'),
+            botShadowEl: $('.bot-shadow'),
         },
 
         initialCheck: function(){
@@ -32,6 +38,7 @@
             }
             console.log('move up');
             console.log('position is at ' + whatsNew.listVars.listPosition);
+            whatsNew.moveListDown();
         },
 
         nextPage: function(){
@@ -42,10 +49,12 @@
                     console.log('get more');
                     break;
 
+                // Move the list only
                 default:
                     whatsNew.listVars.listPosition++;
                     whatsNew.listVars.prevButton.removeAttr('disabled');
                     console.log('move down');
+                    whatsNew.moveListUp();
             }
 
             whatsNew.listVars.prevButton.removeAttr('disabled');
@@ -69,9 +78,38 @@
             if(whatsNew.listVars.remainingCount === 0){
                 whatsNew.listVars.nextButton.attr('disabled', true);
             }
+            this.moveListUp();
+        },
+
+        moveListUp: function(){
+            whatsNew.listVars.curPosition -= whatsNew.listVars.pageHeight;
+            whatsNew.listVars.listElement.css('top', whatsNew.listVars.curPosition + 'px');
+            console.log(whatsNew.listVars.curPosition);
+            this.addRemoveListShadows();
+        },
+
+        moveListDown: function() {
+            whatsNew.listVars.curPosition += whatsNew.listVars.pageHeight;
+            whatsNew.listVars.listElement.css('top', whatsNew.listVars.curPosition + 'px');
+            console.log(whatsNew.listVars.curPosition);
+            this.addRemoveListShadows();
+        },
+
+        addRemoveListShadows: function() {
+            if((this.listVars.listPosition > 1) && (this.listVars.listHeight > 1)) {
+                this.listVars.topShadowEl.addClass('items-above');
+            }
+            else {
+                this.listVars.topShadowEl.removeClass('items-above');
+            }
+            console.log(whatsNew.listVars.listPosition + ' ' + whatsNew.listVars.listHeight);
+            if((this.listVars.listHeight > 1) && (this.listVars.listHeight !== this.listVars.listPosition)) {
+                this.listVars.botShadowEl.addClass('items-below');
+            }
+            else {
+                this.listVars.botShadowEl.removeClass('items-below');
+            }
         }
-
-
 
     };
 
@@ -81,4 +119,7 @@
     // Event listeners
     $('.next').on('click', whatsNew.nextPage);
     $('.prev').on('click', whatsNew.prevPage);
+
+    console.log(whatsNew.listVars.pageHeight);
+
 }(jQuery));

@@ -4,6 +4,9 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss';
 // endbower
 
+/* Imports */
+@import 'mixins';
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -91,3 +94,38 @@ body {
         border-bottom: 0;
     }
 }
+
+/* Page styles */
+#whats-new-wrapper {
+    position: relative;
+    width: 100%;
+    height: 141px;
+    margin-bottom: 1em;
+    overflow: hidden;
+}
+#whats-new {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: left;
+    background-color: #FEFEFE;
+    @include css3transition(all, 0.5s, ease-in-out);
+    li {
+        padding: 1em;
+    }
+}
+.top-shadow, .bot-shadow {
+    margin: 0;
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    @include css3transition(all, 0.5s, ease-in-out);
+}
+.bot-shadow {
+    position: absolute;
+    bottom: 0;
+}
+.items-above, .items-below {
+    @include box-shadow(0, 0, 3px, #757575);
+}
+
